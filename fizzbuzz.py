@@ -25,7 +25,7 @@ def check_number():
         number = int(number)
     except ValueError:
         return render_template("fizzbuzz.html",
-                               errorMessage='Pleałse enter a number!',
+                               errorMessage='Please enter a number!',
                                result_stack=result_stack)
 
     if number < 10 or number > 100:
