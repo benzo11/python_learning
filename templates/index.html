@@ -1,0 +1,23 @@
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="container">
+    <p>Guess a number</p>
+    {% if errorMessage %}
+    <p class="error-message">{{ errorMessage }}</p>
+    {% endif %}
+
+    {% if game_status is not defined or game_status is sameas False %}
+    <form action="/number" method='POST'>
+        <label for="number">Enter number:</label><br>
+        <input type="text" id="number" name="number"><br>
+        <input type="submit" value="Submit">
+    </form>
+    {% else %}
+
+    <p>The number is correct!</p>
+    {% endif %}
+
+</div>
+</html>
