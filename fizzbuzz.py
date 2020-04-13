@@ -2,51 +2,45 @@
 # Računalnik nato vse te številke izpiše in pri vseh, ki so deljive s 3 napiše Fizz (namesto številke).
 # Pri tistih, ki so deljive s 5 izpiše Buzz. Pri tistih, ki so pa hkrati deljive s 3 in 5 pa izpiše FizzBuzz.
 
-from flask import Flask, render_template, request
-
-app = Flask(__name__)
-# Can do something with backend in memory? Put some variable in thread, and than read from thread? is that possible?
-result_stack = []
+import os
 
 
-@app.route("/")
-def index():
-    return render_template("fizzbuzz.html")
-
-
-@app.route("/number", methods=["POST"])
-def check_number():
-    number = request.form.get("number")
-    fizzbuzz = ''
-
-    try:
-        # In python if we want to compare something, it has to be in the correct type.
-        # User can enter float or some special characters.
-        number = int(number)
-    except ValueError:
-        return render_template("fizzbuzz.html",
-                               errorMessage='Please enter a number!',
-                               result_stack=result_stack)
-
-    if number < 10 or number > 100:
-        return render_template("fizzbuzz.html",
-                               errorMessage='Please enter a number between 10 and 100.',
-                               result_stack=result_stack)
+def check_number(number):
+    fizz_buzz = ''
 
     if number % 3 == 0:
-        fizzbuzz = 'Fizz'
+        fizz_buzz = 'Fizz'
     if number % 5 == 0:
-        # Because we already declared fizzbuzz variable, we can append empty or previous value
-        # Could add an extra check if both conditions are true but did not find it necessary.
-        fizzbuzz = fizzbuzz + 'Buzz'
-    if fizzbuzz == '':
-        fizzbuzz = number
+        fizz_buzz = fizz_buzz + 'Buzz'
+    if fizz_buzz == '':
+        fizz_buzz = number
 
-    result_stack.append(fizzbuzz)
-
-    return render_template("fizzbuzz.html",
-                           result_stack=result_stack)
+    return fizz_buzz
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8080, debug=True)
+    os.system('clear')
+
+    print("\t**********************************************")
+    print("\t*** Fizzbuzz  ***")
+    print("\t*** Enter a number ***")
+    print("\t*** Write 'exit' to exit the program ***")
+    print("\t**********************************************")
+
+    while True:
+        number_input = input('Enter a number: ')
+
+        try:
+            if number_input == 'exit':
+                break
+
+            number_input = int(number_input)
+            if number_input < 10 or number_input > 100:
+                raise ValueError
+            print("\t*** Result  ***")
+
+            for i in range(1, number_input + 1):
+                print('\t', check_number(i))
+            print("**********************************************")
+        except ValueError:
+            print('Re-enter a number between 10 and 100')
