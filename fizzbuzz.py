@@ -37,10 +37,11 @@ if __name__ == '__main__':
             number_input = int(number_input)
             if number_input < 10 or number_input > 100:
                 raise ValueError
-            print("\t*** Result  ***")
 
+            print("\t*** Result  ***")
             for i in range(1, number_input + 1):
                 print('\t', check_number(i))
             print("**********************************************")
+
         except ValueError:
             print('Re-enter a number between 10 and 100')
