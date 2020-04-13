@@ -25,9 +25,9 @@ if __name__ == '__main__':
             number = int(number)
 
             if number < random_value:
-                print('number too low')
+                print('Number is too low')
             if number > random_value:
-                print('number too big')
+                print('Number is too big')
             if number == random_value:
                 print('Congrats the number is correct')
                 exit()
